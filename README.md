@@ -4,6 +4,10 @@ Brevet time calculator.
 ## Overview
 * A `README.md` file that includes not only identifying information (your name, email, etc.) but but also a revised, clear specification of the brevet controle time calculation rules.
 
+author= Cristian Daniel Ion
+email= ion.cristian123@gmail.com
+repo= https://github.com/cristianionion/UOCIS322-P4
+
 acp_times.py computes the open and close times of brevet control locations
 open and close times depend on the distance of the control locations
 to find the times we need, we divide the distance by the rate(distance/time) which will give us the correct time
