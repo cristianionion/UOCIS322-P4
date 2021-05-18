@@ -31,13 +31,13 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     """
     end = brevet_dist_km
     dist = control_dist_km
-    otime = arrow.get(brevet_start_time)
+    otime = arrow.get(brevet_start_time) #we will adjust time based on distance at the end
 
 
-    time = 0
+    time = 0 #time to adjust otime by
     newdist = 0
 
-
+    ### the code goes range-by-range, and computes time per interval that the distance belongs to
 
     if (dist <= 200) and (dist > 0):  # 0-200
         time += dist / 34
@@ -77,7 +77,7 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     hour = splittimeformat[1]
     minute = splittimeformat[0]
     minute = minute * 60
-    minute = round(minute)
+    minute = round(minute) # rounds minute value
 
 
     otime = otime.shift(hours=hour, minutes=minute)
@@ -100,11 +100,11 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     """
     end = brevet_dist_km
     dist = control_dist_km
-    ctime = arrow.get(brevet_start_time)
+    ctime = arrow.get(brevet_start_time) # will adjust this at the end based on distance
 
 
 
-    time = 0
+    time = 0 # time to adjust ctime by
     newdist = 0
     # print(speed[200])
     if dist <= 60:
@@ -153,7 +153,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     t = math.modf(time)
     hour = t[1]
     min = t[0] * 60
-    min = round(min)
+    min = round(min) #round minute value
     ctime = ctime.shift(hours=hour, minutes=min)
     return ctime.isoformat()
 
