@@ -123,12 +123,14 @@
               var km = control.find("input[name='km']").val();
               var open_time_field = control.find("input[name='open']");
               var close_time_field = control.find("input[name='close']");
-
-              $.getJSON(TIME_CALC_URL, {km: km}).done(
+              var date = control.find("input[name='begin_date']").val() // get date
+              var date = control.find("input[name='brevet_dist_km']").val() // get distance
+              $.getJSON(TIME_CALC_URL, {km: km, begin_date:begin_date, distance:distance}).done(
                 function(data) {
                    var times = data.result;
                    console.log("Got a response: ");
-                   console.log("Response.open = " + times.open);
+                   console.log("Response.open = " + times.open); 
+                   // I wasn't able to output any open/close time at all, even before making adjustments
                    // This part will automatically fill the open and close slots,
                    // so don't worry about those.
                    open_time_field.val(moment(times.open).format("YYYY-MM-DDTHH:mm"));
