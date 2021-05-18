@@ -77,10 +77,11 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     hour = splittimeformat[1]
     minute = splittimeformat[0]
     minute = minute * 60
+    minute = round(minute)
 
 
     otime = otime.shift(hours=hour, minutes=minute)
-    #string = otime.format('MM-DD HH:mm')
+   
     return otime.isoformat()
     #return arrow.now() #maybe this is the right one
 
@@ -152,8 +153,8 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     t = math.modf(time)
     hour = t[1]
     min = t[0] * 60
+    min = round(min)
     ctime = ctime.shift(hours=hour, minutes=min)
-    string = ctime.format('MM-DD HH:mm')
     return ctime.isoformat()
 
 
