@@ -31,13 +31,12 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     """
     end = brevet_dist_km
     dist = control_dist_km
-    otime = arrow.get(brevet_start_time) #we will adjust time based on distance at the end
+    otime = arrow.get(brevet_start_time)
 
 
-    time = 0 #time to adjust otime by
+    time = 0
     newdist = 0
 
-    ### the code goes range-by-range, and computes time per interval that the distance belongs to
 
     if (dist <= 200) and (dist > 0):  # 0-200
         time += dist / 34
@@ -77,11 +76,12 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     hour = splittimeformat[1]
     minute = splittimeformat[0]
     minute = minute * 60
-    minute = round(minute) # rounds minute value
+    minute = round(minute)
 
 
     otime = otime.shift(hours=hour, minutes=minute)
-   
+    otime = otime.shift(hours=8)
+    print(otime.isoformat())
     return otime.isoformat()
     #return arrow.now() #maybe this is the right one
 
@@ -100,11 +100,11 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     """
     end = brevet_dist_km
     dist = control_dist_km
-    ctime = arrow.get(brevet_start_time) # will adjust this at the end based on distance
+    ctime = arrow.get(brevet_start_time)
 
 
 
-    time = 0 # time to adjust ctime by
+    time = 0
     newdist = 0
     # print(speed[200])
     if dist <= 60:
@@ -141,7 +141,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     print(newdist)
     print("600: ", time)
 
-    if (dist <= 1000) and (dist > 600):  # 601-1000
+    if (dist <= 1000) and (dist > 600):  # 601-1200
         time += newdist / 11.428
     elif ((dist - 1000) > 0) and (dist > 1300):
         time += 400 / 11.428  # 1000+
@@ -153,8 +153,10 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     t = math.modf(time)
     hour = t[1]
     min = t[0] * 60
-    min = round(min) #round minute value
+    min = round(min)
     ctime = ctime.shift(hours=hour, minutes=min)
+    ctime = ctime.shift(hours=8)
+    print(ctime.isoformat())
     return ctime.isoformat()
 
 
