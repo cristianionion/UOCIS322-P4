@@ -98,7 +98,6 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
        A date object indicating the control close time.
        This will be in the same time zone as the brevet start time.
     """
-    end = brevet_dist_km
     dist = control_dist_km
     ctime = arrow.get(brevet_start_time)
 
@@ -106,10 +105,12 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
 
     time = 0
     newdist = 0
+    specialtime = 0
     # print(speed[200])
     if dist <= 60:
-        time += 1
-        time += dist / 20
+        specialtime += 1
+        specialtime += dist / 20
+        print("special time", specialtime)
         ###return early
 
     if (dist <= 200) and (dist > 0):  # 0-200
@@ -154,10 +155,28 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     hour = t[1]
     min = t[0] * 60
     min = round(min)
+    ctime = ctime.shift(hours=8)
+    if dist ==0:
+        ctime = ctime.shift(hours=1)
+        return ctime.isoformat()
     ctime = ctime.shift(hours=hour, minutes=min)
     ctime = ctime.shift(hours=8)
     print(ctime.isoformat())
-    return ctime.isoformat()
+    print(specialtime)
+
+    if (dist <= 60) and (dist != 0):
+        split = math.modf(specialtime)
+        h = split[1]
+        m = split[0]
+        print(m)
+        m = round(m)
+        stime = arrow.get(brevet_start_time)
+        stime = stime.shift(hours=h, minutes=m)
+        stime = stime.shift(hours=8)
+        return stime.isoformat()
+
+    else:
+        return ctime.isoformat()
 
 
     #return arrow.now()
