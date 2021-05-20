@@ -156,11 +156,11 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     min = t[0] * 60
     min = round(min)
     ctime = ctime.shift(hours=8)
-    if dist ==0:
+    if dist == 0:
         ctime = ctime.shift(hours=1)
         return ctime.isoformat()
     ctime = ctime.shift(hours=hour, minutes=min)
-    ctime = ctime.shift(hours=8)
+
     print(ctime.isoformat())
     print(specialtime)
 
@@ -169,6 +169,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
         h = split[1]
         m = split[0]
         print(m)
+        m = m*60
         m = round(m)
         stime = arrow.get(brevet_start_time)
         stime = stime.shift(hours=h, minutes=m)
