@@ -1,5 +1,5 @@
-import acp_times.py
-import nose
+from brevets import acp_times
+#import nose   # testing framework
 import arrow
 import logging
 logging.basicConfig(format='%(levelname)s:%(message)s',
@@ -21,7 +21,7 @@ def test_starting_open_time(): # checks start time to be the same
 def test_starting_open_time1(): # checks open time for large control dist
     ans = arrow.now()
     ans = ans.shift(hours=29, minutes=9)
-    ans = ans.format('YYYY-MM-DD THH:mm')
+    ans = ans.isoformat()
 
     assert acp_times.open_time(890, 1000, arrow.now()) == ans
 
