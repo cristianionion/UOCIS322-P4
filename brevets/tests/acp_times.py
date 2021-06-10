@@ -83,6 +83,7 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     otime = otime.shift(hours=8)
     print(otime.isoformat())
     return otime.isoformat()
+    #return arrow.now() #maybe this is the right one
 
 
 def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
@@ -161,7 +162,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     ctime = ctime.shift(hours=hour, minutes=min)
 
     print(ctime.isoformat())
-    #print(specialtime)
+    print(specialtime)
 
     if (dist <= 60) and (dist != 0):
         split = math.modf(specialtime)
@@ -178,3 +179,5 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
     else:
         return ctime.isoformat()
 
+
+    #return arrow.now()
